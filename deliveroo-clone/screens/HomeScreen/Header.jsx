@@ -4,7 +4,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <View className="flex-row pb-3 items-center gap-x-2 px-3">
+    <View className="flex-row pb-3 items-center gap-x-2 px-4">
       <Image
         source={{ uri: `https://links.papareact.com/wru` }}
         className="h-8 w-8 bg-gray-300 rounded-full"
