@@ -1,32 +1,44 @@
 import { ScrollView } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import Categories from "./Categories";
 import FeaturedRow from "./FeaturedRow";
+import sanityClient from "../../../sanity";
 
 const Body = () => {
+  const [featuredCategories, setFeaturedCategories] = useState();
+  useEffect(() => {
+    sanityClient
+      .fetch(
+        `
+          *[_type=="featured"] {
+            ...,
+            restaurants[]->{
+              ...,
+              dishes[]->
+            }
+          }
+        `
+      )
+      .then((data) => {
+        setFeaturedCategories(data);
+      });
+  }, []);
   return (
     <ScrollView className="bg-gray-100">
       {/* Categories */}
       <Categories />
 
-      {/* Featured */}
-      <FeaturedRow
-        id="123"
-        title="Featured"
-        description="Paid placements from our partners"
-      />
-      {/* Tasty Discounts */}
-      <FeaturedRow
-        id="1234"
-        title="Tasty Discounts"
-        description="Everyone's been enjoying these juicy discounts!"
-      />
-      {/* Offers near you */}
-      <FeaturedRow
-        id="12345"
-        title="Offers near you!"
-        description="Why not support your local restaurant tonight!"
-      />
+      {featuredCategories?.map((category) => {
+        return (
+          <FeaturedRow
+            key={category._id}
+            id={category._id}
+            title={category.name}
+            description={category.short_description}
+          />
+        );
+      })}
     </ScrollView>
   );
 };
