@@ -108,7 +108,7 @@ const App = () => {
                   <TextInput
                     style={styles.inputStyle}
                     value={values.passwordLength}
-                    onChangeText={() => handleChange('passwordLength')}
+                    onChangeText={handleChange('passwordLength')}
                     placeholder="Ex. 8"
                     keyboardType="number-pad"
                   />
@@ -129,7 +129,7 @@ const App = () => {
                     disableBuiltInState
                     isChecked={uppercase}
                     onPress={() => setUppercase(!uppercase)}
-                    fillColor="#29AB87"
+                    fillColor="#FED85D"
                   />
                 </View>
                 <View style={styles.inputWrapper}>
@@ -138,7 +138,7 @@ const App = () => {
                     disableBuiltInState
                     isChecked={numbers}
                     onPress={() => setNumbers(!numbers)}
-                    fillColor="#29AB87"
+                    fillColor="#C9A0DC"
                   />
                 </View>
                 <View style={styles.inputWrapper}>
@@ -147,7 +147,7 @@ const App = () => {
                     disableBuiltInState
                     isChecked={symbols}
                     onPress={() => setSymbols(!symbols)}
-                    fillColor="#29AB87"
+                    fillColor="#FC80A5"
                   />
                 </View>
                 <View style={styles.formActions}>
@@ -173,6 +173,7 @@ const App = () => {
         {isPassGenerated ? (
           <View>
             <Text>Test</Text>
+            <Text>{password}</Text>
           </View>
         ) : null}
       </SafeAreaView>
